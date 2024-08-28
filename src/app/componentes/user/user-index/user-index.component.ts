@@ -1,17 +1,4 @@
 import { Component } from '@angular/core';
-
-
-@Component({
-  selector: 'app-user-index',
-  standalone: true,
-  imports: [],
-  templateUrl: './user-index.component.html',
-  styleUrl: './user-index.component.css'
-})
-export class UserIndexComponent {
-
-}
-
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { User } from '../../../interfaces/user';
 import { MatInputModule } from '@angular/material/input';
@@ -83,4 +70,3 @@ export class UserIndexComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
->>>>>>> b929d0a28f5de52d9ec8d09633eebe60f4a2a158
