@@ -21,3 +21,4 @@ describe('UserIndexComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
