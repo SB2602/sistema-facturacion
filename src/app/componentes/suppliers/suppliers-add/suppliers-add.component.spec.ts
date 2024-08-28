@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserIndexComponent } from './user-index.component';
+import { SuppliersAddComponent } from './suppliers-add.component';
 
-describe('UserIndexComponent', () => {
-  let component: UserIndexComponent;
-  let fixture: ComponentFixture<UserIndexComponent>;
+describe('SuppliersAddComponent', () => {
+  let component: SuppliersAddComponent;
+  let fixture: ComponentFixture<SuppliersAddComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserIndexComponent]
+      imports: [SuppliersAddComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UserIndexComponent);
+    fixture = TestBed.createComponent(SuppliersAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,4 +21,3 @@ describe('UserIndexComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
