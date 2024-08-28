@@ -1,79 +1,67 @@
 <form class="add-form">
   <h2 class="title">Registrar Producto</h2>
+
   <mat-form-field class="full-width">
-    <mat-label>Nombre</mat-label>
+    <mat-label>Nombre del Producto</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="nameFormControl"
-      placeholder="Ex. John"
+      [formControl]="nombreProductoFormControl"
+      placeholder="Ex. Laptop ASUS"
     />
-    @if (nameFormControl.hasError('required')) {
-    <mat-error>El nombre es requerido</mat-error>
-    }
+    <mat-error *ngIf="nombreProductoFormControl.hasError('required')">
+      El nombre del producto es requerido
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Apellido</mat-label>
+    <mat-label>Descripción</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="surnameFormControl"
-      placeholder="Ex. Doe"
+      [formControl]="descripcionFormControl"
+      placeholder="Ex. Laptop con procesador Intel i7"
     />
-    @if (surnameFormControl.hasError('required')) {
-    <mat-error>El apellido es requerido</mat-error>
-    }
+    <mat-error *ngIf="descripcionFormControl.hasError('required')">
+      La descripción es requerida
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
+    <mat-label>Precio</mat-label>
     <input
-      type="email"
+      type="number"
       matInput
-      [formControl]="emailFormControl"
-      placeholder="Ex. mail@example.com"
+      [formControl]="precioFormControl"
+      placeholder="Ex. 1500.00"
     />
-    @if (emailFormControl.hasError('email') &&
-    !emailFormControl.hasError('required')) {
-    <mat-error>Please enter a valid email address</mat-error>
-    } @if (emailFormControl.hasError('required')) {
-    <mat-error>El email es requerido</mat-error>
-    }
+    <mat-error *ngIf="precioFormControl.hasError('required')">
+      El precio es requerido
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Contraseña</mat-label>
+    <mat-label>Stock</mat-label>
     <input
+      type="number"
       matInput
-      [type]="hide() ? 'password' : 'text'"
-      [formControl]="passwordFormControl"
+      [formControl]="stockFormControl"
+      placeholder="Ex. 10"
     />
-    @if (passwordFormControl.hasError('required')) {
-    <mat-error>La contraseña es requerida</mat-error>
-    }
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="clickEvent($event)"
-      [attr.aria-label]="'Esconder contraseña'"
-      [attr.aria-pressed]="hide()"
-    >
-      <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
+    <mat-error *ngIf="stockFormControl.hasError('required')">
+      El stock es requerido
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Rol del Producto</mat-label>
-    <mat-select [formControl]="roleControl" required>
-      <mat-option>--</mat-option>
-      @for (role of roles; track role) {
-      <mat-option [value]="role">{{ role.name }}</mat-option>
-      }
+    <mat-label>Estado</mat-label>
+    <mat-select [formControl]="estadoFormControl" required>
+      <mat-option value="true">Activo</mat-option>
+      <mat-option value="false">Inactivo</mat-option>
     </mat-select>
-    @if (roleControl.hasError('required')) {
-    <mat-error>El rol es requerido</mat-error>
-    }
+    <mat-error *ngIf="estadoFormControl.hasError('required')">
+      El estado es requerido
+    </mat-error>
   </mat-form-field>
 
   <div class="buttons">

@@ -1,43 +1,40 @@
 import { Component } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { User } from '../../../interfaces/user';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { Products } from '../../../interfaces/products';
 
-const ELEMENT_DATA: User[] = [
+const ELEMENT_DATA: Products[] = [
   {
     id: 1,
-    name: 'Juan',
-    surname: 'Pérez',
-    email: 'juan.perez@example.com',
-    password: '123456',
-    role: 'admin',
-    creationDate: new Date('2022-01-01'),
-    state: true,
+    nombre_producto: 'Laptop ASUS',
+    descripcion:
+      'Laptop ASUS de 15 pulgadas con procesador Intel i7 y 16GB de RAM.',
+    precio: 1500.0,
+    stock: 10,
+    estado: true,
   },
   {
     id: 2,
-    name: 'María',
-    surname: 'Gómez',
-    email: 'maria.gomez@example.com',
-    password: 'abcdef',
-    role: 'vendedor',
-    creationDate: new Date('2022-02-01'),
-    state: true,
+    nombre_producto: 'Mouse Logitech',
+    descripcion:
+      'Mouse inalámbrico Logitech con batería recargable y sensor óptico.',
+    precio: 50.0,
+    stock: 50,
+    estado: true,
   },
   {
     id: 3,
-    name: 'Pedro',
-    surname: 'Rodríguez',
-    email: 'pedro.rodriguez@example.com',
-    password: '987654',
-    role: 'admin',
-    creationDate: new Date('2022-03-01'),
-    state: false,
+    nombre_producto: 'Monitor Samsung',
+    descripcion: 'Monitor Samsung de 24 pulgadas con resolución Full HD.',
+    precio: 200.0,
+    stock: 5,
+    estado: false,
   },
 ];
+
 @Component({
   selector: 'app-index',
   standalone: true,
@@ -54,13 +51,11 @@ const ELEMENT_DATA: User[] = [
 export class ProductsIndexComponent {
   displayedColumns: string[] = [
     'id',
-    'name',
-    'surname',
-    'email',
-    'password',
-    'role',
-    'creationDate',
-    'state',
+    'nombre_producto',
+    'descripcion',
+    'precio',
+    'stock',
+    'estado',
   ];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);

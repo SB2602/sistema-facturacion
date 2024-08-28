@@ -1,83 +1,45 @@
 <form class="add-form">
-  <h2 class="title">Registrar Categoria</h2>
+  <h2 class="title">Registrar Categoría</h2>
+
   <mat-form-field class="full-width">
-    <mat-label>Nombre</mat-label>
+    <mat-label>Nombre Categoría</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="nameFormControl"
-      placeholder="Ex. John"
+      [formControl]="nombreCategoriasFormControl"
+      placeholder="Ex. Tecnología"
     />
-    @if (nameFormControl.hasError('required')) {
-    <mat-error>El nombre es requerido</mat-error>
-    }
+    <mat-error *ngIf="nombreCategoriasFormControl.hasError('required')">
+      El nombre de la categoría es requerido
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Apellido</mat-label>
+    <mat-label>Descripción</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="surnameFormControl"
-      placeholder="Ex. Doe"
+      [formControl]="descripcionFormControl"
+      placeholder="Descripción de la categoría"
     />
-    @if (surnameFormControl.hasError('required')) {
-    <mat-error>El apellido es requerido</mat-error>
-    }
+    <mat-error *ngIf="descripcionFormControl.hasError('required')">
+      La descripción es requerida
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
-    <input
-      type="email"
-      matInput
-      [formControl]="emailFormControl"
-      placeholder="Ex. mail@example.com"
-    />
-    @if (emailFormControl.hasError('email') &&
-    !emailFormControl.hasError('required')) {
-    <mat-error>Please enter a valid email address</mat-error>
-    } @if (emailFormControl.hasError('required')) {
-    <mat-error>El email es requerido</mat-error>
-    }
-  </mat-form-field>
-
-  <mat-form-field class="full-width">
-    <mat-label>Contraseña</mat-label>
-    <input
-      matInput
-      [type]="hide() ? 'password' : 'text'"
-      [formControl]="passwordFormControl"
-    />
-    @if (passwordFormControl.hasError('required')) {
-    <mat-error>La contraseña es requerida</mat-error>
-    }
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="clickEvent($event)"
-      [attr.aria-label]="'Esconder contraseña'"
-      [attr.aria-pressed]="hide()"
-    >
-      <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
-  </mat-form-field>
-
-  <mat-form-field class="full-width">
-    <mat-label>Rol de la Categoria</mat-label>
-    <mat-select [formControl]="roleControl" required>
-      <mat-option>--</mat-option>
-      @for (role of roles; track role) {
-      <mat-option [value]="role">{{ role.name }}</mat-option>
-      }
+    <mat-label>Estado</mat-label>
+    <mat-select [formControl]="estadoFormControl" required>
+      <mat-option value="Activo">Activo</mat-option>
+      <mat-option value="Inactivo">Inactivo</mat-option>
     </mat-select>
-    @if (roleControl.hasError('required')) {
-    <mat-error>El rol es requerido</mat-error>
-    }
+    <mat-error *ngIf="estadoFormControl.hasError('required')">
+      El estado es requerido
+    </mat-error>
   </mat-form-field>
 
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Registrar categoria'">
+    <button mat-fab extended [attr.aria-label]="'Registrar categoría'">
       <mat-icon>add</mat-icon>
       Registrar
     </button>

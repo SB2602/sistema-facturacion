@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
-
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Role } from '../../../interfaces/role';
 
 @Component({
@@ -26,32 +26,40 @@ import { Role } from '../../../interfaces/role';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    CommonModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsAddComponent {
-  nameFormControl = new FormControl('', [
+  nombreProductoFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern('^[a-zA-Z0-9 ]+$'),
   ]);
-  surnameFormControl = new FormControl('', [
+
+  descripcionFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern('^[a-zA-Z0-9., ]+$'),
   ]);
-  emailFormControl = new FormControl('', [
+
+  precioFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
+    Validators.min(0.01),
   ]);
-  passwordFormControl = new FormControl('', [
+
+  stockFormControl = new FormControl('', [
     Validators.required,
-    Validators.min(5),
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.min(0),
   ]);
+
+  estadoFormControl = new FormControl<boolean | null>(
+    null,
+    Validators.required
+  );
+
   hide = signal(true);
+
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
-  roleControl = new FormControl<Role | null>(null, Validators.required);
-  roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
 }

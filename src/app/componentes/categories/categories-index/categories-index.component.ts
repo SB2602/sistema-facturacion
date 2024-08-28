@@ -1,43 +1,33 @@
 import { Component } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { User } from '../../../interfaces/user';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { Categories } from '../../../interfaces/categories';
 
-const ELEMENT_DATA: User[] = [
+const ELEMENT_DATA: Categories[] = [
   {
     id: 1,
-    name: 'Juan',
-    surname: 'Pérez',
-    email: 'juan.perez@example.com',
-    password: '123456',
-    role: 'admin',
-    creationDate: new Date('2022-01-01'),
-    state: true,
+    nombre_categorias: 'Electrónica',
+    descripcion:
+      'Dispositivos electrónicos como computadoras, smartphones, y accesorios.',
+    estado: true,
   },
   {
     id: 2,
-    name: 'María',
-    surname: 'Gómez',
-    email: 'maria.gomez@example.com',
-    password: 'abcdef',
-    role: 'vendedor',
-    creationDate: new Date('2022-02-01'),
-    state: true,
+    nombre_categorias: 'Muebles',
+    descripcion: 'Mobiliario para el hogar y la oficina.',
+    estado: true,
   },
   {
     id: 3,
-    name: 'Pedro',
-    surname: 'Rodríguez',
-    email: 'pedro.rodriguez@example.com',
-    password: '987654',
-    role: 'admin',
-    creationDate: new Date('2022-03-01'),
-    state: false,
+    nombre_categorias: 'Ropa',
+    descripcion: 'Prendas de vestir para todas las edades.',
+    estado: false,
   },
 ];
+
 @Component({
   selector: 'app-index',
   standalone: true,
@@ -51,16 +41,12 @@ const ELEMENT_DATA: User[] = [
   templateUrl: './categories-index.component.html',
   styleUrl: './categories-index.component.css',
 })
-export class CategoriesIndexComponent{
+export class CategoriesIndexComponent {
   displayedColumns: string[] = [
     'id',
-    'name',
-    'surname',
-    'email',
-    'password',
-    'role',
-    'creationDate',
-    'state',
+    'nombre_categorias',
+    'descripcion',
+    'estado',
   ];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
