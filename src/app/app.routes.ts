@@ -1,20 +1,16 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
-<<<<<<< HEAD
-
-export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent, title: 'Login' },
-    { path: 'home', component: HomeComponent, title: 'Home' },
- ];
-  
-=======
 import { UserAddComponent } from './componentes/user/user-add/user-add.component';
 import { UserIndexComponent } from './componentes/user/user-index/user-index.component';
 import { UserEditComponent } from './componentes/user/user-edit/user-edit.component';
 import { SuppliersIndexComponent } from './componentes/suppliers/suppliers-index/suppliers-index.component';
 import { SuppliersAddComponent } from './componentes/suppliers/suppliers-add/suppliers-add.component';
+import { ProductsAddComponent } from './componentes/products/products-add/products-add.component';
+import { ProductsIndexComponent } from './componentes/products/products-index/products-index.component';
+import { CategoriesAddComponent } from './componentes/categories/categories-add/categories-add.component';
+import { CategoriesIndexComponent } from './componentes/categories/categories-index/categories-index.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, title: 'Login' },
@@ -39,5 +35,25 @@ export const routes: Routes = [
     component: SuppliersAddComponent,
     title: 'Registrar Usuario',
   },
+
+  {
+    path: 'products/index',
+    component: ProductsIndexComponent,
+    title: 'Indice de Productos',
+  },
+  {
+    path: 'products/add',
+    component: ProductsAddComponent,
+    title: 'Registrar Producto',
+  },
+  {
+    path: 'categories/index',
+    component: CategoriesIndexComponent,
+    title: 'Indice de Categorias',
+  },
+  {
+    path: 'categories/add',
+    component: CategoriesAddComponent,
+    title: 'Registrar Categoria',
+  },
 ];
->>>>>>> b929d0a28f5de52d9ec8d09633eebe60f4a2a158
