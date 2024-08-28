@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 
 import { Role } from '../../../interfaces/role';
 
@@ -24,6 +25,7 @@ import { Role } from '../../../interfaces/role';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    CommonModule,
   ],
   templateUrl: './clients-add.component.html',
   styleUrl: './clients-add.component.css'
@@ -41,11 +43,12 @@ export class ClientsAddComponent {
     Validators.required,
     Validators.email,
   ]);
-  passwordFormControl = new FormControl('', [
+  phoneFormControl = new FormControl('', [
     Validators.required,
-    Validators.min(5),
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern('^[0-9+ ]+$'),
   ]);
+  addressFormControl = new FormControl('', [Validators.required]);
+  statusFormControl = new FormControl<'activo' | 'inactivo' | null>(null, Validators.required);
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
