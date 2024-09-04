@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
-import { Role } from '../../../interfaces/role';
+
 
 @Component({
   selector: 'app-suppliers-add',
@@ -30,6 +30,10 @@ import { Role } from '../../../interfaces/role';
   styleUrl: './suppliers-add.component.css',
 })
 export class SuppliersAddComponent {
+  rucFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[0-9]{11}$') 
+  ]);
   nameFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-zA-Z ]+$'),
@@ -53,6 +57,5 @@ export class SuppliersAddComponent {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
-  roleControl = new FormControl<Role | null>(null, Validators.required);
-  roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
+  
 }
