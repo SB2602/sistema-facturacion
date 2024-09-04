@@ -1,7 +1,5 @@
-
-
 <div class="index">
-  <h2 class="title">Indice de Usuarios</h2>
+  <h2 class="title">Indice de Productos</h2>
   <div>
     <mat-form-field>
       <mat-label>Filtro</mat-label>
@@ -25,14 +23,14 @@
               <div class="action-buttons">
                 <button
                   mat-icon-button
-                  [routerLink]="['/user/edit']"
+                  [routerLink]="['/products/edit']"
                   class="buttonedit"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
                 <button
                   mat-icon-button
-                  (click)="deleteUser(element.id)"
+                  (click)="deleteProduct(element.id)"
                   class="buttondelete"
                 >
                   <mat-icon>delete</mat-icon>
@@ -49,10 +47,10 @@
   </div>
 
   <div class="buttons">
-    <a routerLink="/user/add">
-      <button mat-fab extended [attr.aria-label]="'Añadir usuario'">
+    <a routerLink="/products/add">
+      <button mat-fab extended [attr.aria-label]="'Añadir producto'">
         <mat-icon>add</mat-icon>
-        Añadir usuario
+        Añadir producto
       </button>
     </a>
 
@@ -64,4 +62,3 @@
     </a>
   </div>
 </div>
-

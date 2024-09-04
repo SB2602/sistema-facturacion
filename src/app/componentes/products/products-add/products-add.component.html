@@ -1,0 +1,80 @@
+<form class="add-form">
+  <h2 class="title">Registrar Producto</h2>
+
+  <mat-form-field class="full-width">
+    <mat-label>Nombre del Producto</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="nombreProductoFormControl"
+      placeholder="Ex. Laptop ASUS"
+    />
+    <mat-error *ngIf="nombreProductoFormControl.hasError('required')">
+      El nombre del producto es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Descripción</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="descripcionFormControl"
+      placeholder="Ex. Laptop con procesador Intel i7"
+    />
+    <mat-error *ngIf="descripcionFormControl.hasError('required')">
+      La descripción es requerida
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Precio</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControl]="precioFormControl"
+      placeholder="Ex. 1500.00"
+    />
+    <mat-error *ngIf="precioFormControl.hasError('required')">
+      El precio es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Stock</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControl]="stockFormControl"
+      placeholder="Ex. 10"
+    />
+    <mat-error *ngIf="stockFormControl.hasError('required')">
+      El stock es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Estado</mat-label>
+    <mat-select [formControl]="estadoFormControl" required>
+      <mat-option value="true">Activo</mat-option>
+      <mat-option value="false">Inactivo</mat-option>
+    </mat-select>
+    <mat-error *ngIf="estadoFormControl.hasError('required')">
+      El estado es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button mat-fab extended [attr.aria-label]="'Registrar producto'">
+      <mat-icon>add</mat-icon>
+      Registrar
+    </button>
+
+    <a routerLink="/products/index">
+      <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
+  </div>
+</form>
