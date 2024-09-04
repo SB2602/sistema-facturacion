@@ -6,28 +6,8 @@ import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { Categories } from '../../../interfaces/categories';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
-
-const ELEMENT_DATA: Categories[] = [
-  {
-    id: 1,
-    nombre_categorias: 'Electrónica',
-    descripcion:
-      'Dispositivos electrónicos como computadoras, smartphones, y accesorios.',
-    estado: true,
-  },
-  {
-    id: 2,
-    nombre_categorias: 'Muebles',
-    descripcion: 'Mobiliario para el hogar y la oficina.',
-    estado: true,
-  },
-  {
-    id: 3,
-    nombre_categorias: 'Ropa',
-    descripcion: 'Prendas de vestir para todas las edades.',
-    estado: false,
-  },
-];
+import { CategoriesService } from '../categories.service'; // Importa el servicio
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-index',
@@ -39,20 +19,33 @@ const ELEMENT_DATA: Categories[] = [
     MatButtonModule,
     RouterLink,
     CommonModule,
+    HttpClientModule,
   ],
+  providers: [CategoriesService],
   templateUrl: './categories-index.component.html',
-  styleUrl: './categories-index.component.css',
+  styleUrls: ['./categories-index.component.css'],
 })
 export class CategoriesIndexComponent {
   displayedColumns: string[] = [
     'id',
     'nombre_categorias',
     'descripcion',
-    'estado',
     'acciones',
   ];
 
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Categories>([]);
+
+  constructor(private categoriesService: CategoriesService) {} // Inyecta el servicio
+  ngOnInit() {
+    this.categoriesService.getCategories().subscribe(
+      (data) => {
+        this.dataSource.data = data;
+      },
+      (error) => {
+        console.error('Error al cargar las categorias', error);
+      }
+    );
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -61,9 +54,11 @@ export class CategoriesIndexComponent {
 
   // Método para eliminar un cliente por su ID
   deleteCategory(id: number): void {
-    this.dataSource.data = this.dataSource.data.filter(
-      (category) => category.id !== id
-    );
-    console.log(`Categoría con id ${id} eliminado`);
+    this.categoriesService.deleteCategory(id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter(
+        (category) => category.id !== id
+      );
+      console.log(`Categoría con id ${id} eliminado`);
+    });
   }
 }

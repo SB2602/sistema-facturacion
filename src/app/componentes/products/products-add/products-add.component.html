@@ -53,17 +53,6 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <mat-label>Estado</mat-label>
-    <mat-select [formControl]="estadoFormControl" required>
-      <mat-option value="true">Activo</mat-option>
-      <mat-option value="false">Inactivo</mat-option>
-    </mat-select>
-    <mat-error *ngIf="estadoFormControl.hasError('required')">
-      El estado es requerido
-    </mat-error>
-  </mat-form-field>
-
   <div class="buttons">
     <button mat-fab extended [attr.aria-label]="'Registrar producto'">
       <mat-icon>add</mat-icon>

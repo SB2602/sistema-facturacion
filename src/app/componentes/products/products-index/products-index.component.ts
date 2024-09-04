@@ -57,7 +57,6 @@ export class ProductsIndexComponent {
     'descripcion',
     'precio',
     'stock',
-    'estado',
     'acciones',
   ];
 
