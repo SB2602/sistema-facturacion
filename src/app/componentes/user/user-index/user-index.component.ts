@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 
 const ELEMENT_DATA: User[] = [
   {
@@ -16,8 +17,8 @@ const ELEMENT_DATA: User[] = [
     rol: 'admin',
     fecha_creacion: new Date('2022-01-01'),
     estado: true,
-},
-{
+  },
+  {
     id: 2,
     nombre: 'María',
     apellido: 'Gómez',
@@ -26,8 +27,8 @@ const ELEMENT_DATA: User[] = [
     rol: 'vendedor',
     fecha_creacion: new Date('2022-02-01'),
     estado: true,
-},
-{
+  },
+  {
     id: 3,
     nombre: 'Pedro',
     apellido: 'Rodríguez',
@@ -36,8 +37,7 @@ const ELEMENT_DATA: User[] = [
     rol: 'admin',
     fecha_creacion: new Date('2022-03-01'),
     estado: false,
-},
-
+  },
 ];
 @Component({
   selector: 'app-index',
@@ -48,6 +48,7 @@ const ELEMENT_DATA: User[] = [
     MatIcon,
     MatButtonModule,
     RouterLink,
+    CommonModule,
   ],
   templateUrl: './user-index.component.html',
   styleUrl: './user-index.component.css',
@@ -62,6 +63,7 @@ export class UserIndexComponent {
     'rol',
     'fecha_creacion',
     'estado',
+    'acciones',
   ];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -69,5 +71,11 @@ export class UserIndexComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  deleteUser(id: number): void {
+    this.dataSource.data = this.dataSource.data.filter(
+      (user) => user.id !== id
+    );
+    console.log(`Usuario con id ${id} eliminado`);
   }
 }

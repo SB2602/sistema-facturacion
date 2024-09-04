@@ -8,6 +8,8 @@ import { SuppliersIndexComponent } from './componentes/suppliers/suppliers-index
 import { SuppliersAddComponent } from './componentes/suppliers/suppliers-add/suppliers-add.component';
 import { ClientsIndexComponent } from './componentes/clients/clients-index/clients-index.component';
 import { ClientsAddComponent } from './componentes/clients/clients-add/clients-add.component';
+import { ClientsEditComponent } from './componentes/clients/clients-edit/clients-edit.component';
+import { SuppliersEditComponent } from './componentes/suppliers/suppliers-edit/suppliers-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,6 +26,11 @@ export const routes: Routes = [
     title: 'Registrar Usuario',
   },
   {
+    path: 'user/edit',
+    component: UserEditComponent,
+    title: 'Editar Usuario',
+  },
+  {
     path: 'suppliers/index',
     component: SuppliersIndexComponent,
     title: 'Indice de Proveedores',
@@ -34,6 +41,11 @@ export const routes: Routes = [
     title: 'Registrar Usuario',
   },
   {
+    path: 'suppliers/edit',
+    component: SuppliersEditComponent,
+    title: 'Editar Proveedor',
+  },
+  {
     path: 'clients/index',
     component:ClientsIndexComponent,
     title:'Indice de clientes',
@@ -42,5 +54,10 @@ export const routes: Routes = [
     path: 'clients/add',
     component: ClientsAddComponent,
     title: 'Registrar cliente',
+  },
+  {
+    path: 'clients/edit',
+    component: ClientsEditComponent,
+    title: 'Editar cliente',
   },
 ];

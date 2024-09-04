@@ -5,10 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { Clients } from '../../../interfaces/clients';
+import { CommonModule } from '@angular/common';  // Importa CommonModule
 
 const ELEMENT_DATA: Clients[] = [
   {
     id: 1,
+    ruc:'12345678',
     nombre: 'Ana',
     apellido: 'Martínez',
     correo: 'ana.martinez@ejemplo.com',
@@ -19,6 +21,7 @@ const ELEMENT_DATA: Clients[] = [
 },
 {
     id: 2,
+    ruc:'12345678',
     nombre: 'Luis',
     apellido: 'Hernández',
     correo: 'luis.hernandez@ejemplo.com',
@@ -29,6 +32,7 @@ const ELEMENT_DATA: Clients[] = [
 },
 {
     id: 3,
+    ruc:'12345678',
     nombre: 'Carla',
     apellido: 'Ríos',
     correo: 'carla.rios@ejemplo.com',
@@ -49,6 +53,7 @@ const ELEMENT_DATA: Clients[] = [
     MatIcon,
     MatButtonModule,
     RouterLink,
+    CommonModule,
   ],
   templateUrl: './clients-index.component.html',
   styleUrl: './clients-index.component.css',
@@ -57,12 +62,12 @@ export class ClientsIndexComponent {
   displayedColumns: string[] = [
     'id',
     'nombre',
+    'ruc',
     'apellido',
     'correo',
     'telefono',
     'direccion',
-    'fecha_creacion',
-    'estado',
+    'acciones'
   ];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -70,5 +75,10 @@ export class ClientsIndexComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  // Método para eliminar un cliente por su ID
+  deleteClient(id: number): void {
+    this.dataSource.data = this.dataSource.data.filter(client => client.id !== id);
+    console.log(`Cliente con id ${id} eliminado`);
   }
 }
