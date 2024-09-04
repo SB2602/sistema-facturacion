@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Suppliers } from '../../interfaces/suppliers';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { Suppliers } from '../../interfaces/suppliers';
 })
 export class SuppliersService {
   private apiUrl = 'http://localhost:8080/api/v1/suppliers';
+  private suppliersSubject = new BehaviorSubject<Suppliers[]>([]);
+  suppliers$ = this.suppliersSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -29,5 +31,9 @@ export class SuppliersService {
 
   deleteSupplier(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  refreshSuppliers() {
+    this.getSuppliers().subscribe(suppliers => this.suppliersSubject.next(suppliers));
   }
 }
