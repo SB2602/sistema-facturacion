@@ -1,44 +1,64 @@
-
-
 <div class="index">
-    <h2 class="title">Indice de Categorias</h2>
-    <div>
-      <mat-form-field>
-        <mat-label>Filtro</mat-label>
-        <input
-          matInput
-          (keyup)="applyFilter($event)"
-          placeholder="Contenido a filtrar"
-          #input
-        />
-      </mat-form-field>
-      <table mat-table [dataSource]="dataSource" class="table">
-        @for (column of displayedColumns; track column) {
+  <h2 class="title">Indice de Categorias</h2>
+  <div>
+    <mat-form-field>
+      <mat-label>Filtro</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Contenido a filtrar"
+        #input
+      />
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="table">
+      <ng-container *ngFor="let column of displayedColumns">
         <ng-container matColumnDef="{{ column }}">
           <th mat-header-cell *matHeaderCellDef>{{ column.toUpperCase() }}</th>
-          <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+          <td mat-cell *matCellDef="let element">
+            <!-- Mostrar contenido o acciones -->
+            <ng-container *ngIf="column !== 'acciones'; else actionsTemplate">
+              {{ element[column] }}
+            </ng-container>
+            <ng-template #actionsTemplate>
+              <div class="action-buttons">
+                <button
+                  mat-icon-button
+                  [routerLink]="['/categories/edit']"
+                  class="buttonedit"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  (click)="deleteCategory(element.id)"
+                  class="buttondelete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </ng-template>
+          </td>
         </ng-container>
-        }
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
-  
-    <div class="buttons">
-      <a routerLink="/categories/add">
-        <button mat-fab extended [attr.aria-label]="'Añadir categoria'">
-          <mat-icon>add</mat-icon>
-          Añadir categoria
-        </button>
-      </a>
-  
-      <a routerLink="/home">
-        <button mat-fab extended [attr.aria-label]="'Regresar'">
-          <mat-icon>keyboard_return</mat-icon>
-          Regresar
-        </button>
-      </a>
-    </div>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
   </div>
-  
+
+  <div class="buttons">
+    <a routerLink="/categories/add">
+      <button mat-fab extended [attr.aria-label]="'Añadir categoria'">
+        <mat-icon>add</mat-icon>
+        Añadir categoria
+      </button>
+    </a>
+
+    <a routerLink="/home">
+      <button mat-fab extended [attr.aria-label]="'Regresar'">
+        <mat-icon>keyboard_return</mat-icon>
+        Regresar
+      </button>
+    </a>
+  </div>
+</div>

@@ -10,6 +10,8 @@ import { ProductsAddComponent } from './componentes/products/products-add/produc
 import { ProductsIndexComponent } from './componentes/products/products-index/products-index.component';
 import { CategoriesAddComponent } from './componentes/categories/categories-add/categories-add.component';
 import { CategoriesIndexComponent } from './componentes/categories/categories-index/categories-index.component';
+import { ProductsEditComponent } from './componentes/products/products-edit/products-edit.component';
+import { CategoriesEditComponent } from './componentes/categories/categories-edit/categories-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -47,13 +49,23 @@ export const routes: Routes = [
     title: 'Registrar Producto',
   },
   {
+    path: 'products/edit',
+    component: ProductsEditComponent,
+    title: 'Editar producto',
+  },
+  {
     path: 'categories/index',
     component: CategoriesIndexComponent,
-    title: 'Indice de Categorias',
+    title: 'Indice de categorias',
   },
   {
     path: 'categories/add',
     component: CategoriesAddComponent,
-    title: 'Registrar Categoria',
+    title: 'Registrar categoria',
+  },
+  {
+    path: 'categories/edit',
+    component: CategoriesEditComponent,
+    title: 'Editar categoria',
   },
 ];

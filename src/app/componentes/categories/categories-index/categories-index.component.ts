@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { Categories } from '../../../interfaces/categories';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 
 const ELEMENT_DATA: Categories[] = [
   {
@@ -37,6 +38,7 @@ const ELEMENT_DATA: Categories[] = [
     MatIcon,
     MatButtonModule,
     RouterLink,
+    CommonModule,
   ],
   templateUrl: './categories-index.component.html',
   styleUrl: './categories-index.component.css',
@@ -47,6 +49,7 @@ export class CategoriesIndexComponent {
     'nombre_categorias',
     'descripcion',
     'estado',
+    'acciones',
   ];
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -54,5 +57,13 @@ export class CategoriesIndexComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  // Método para eliminar un cliente por su ID
+  deleteCategory(id: number): void {
+    this.dataSource.data = this.dataSource.data.filter(
+      (category) => category.id !== id
+    );
+    console.log(`Categoría con id ${id} eliminado`);
   }
 }
