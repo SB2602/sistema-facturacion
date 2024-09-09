@@ -8,7 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-suppliers-edit',
   standalone: true,
@@ -18,6 +19,8 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     ReactiveFormsModule,
     CommonModule,
+    MatButtonModule,
+    RouterLink,
   ],
   templateUrl: './suppliers-edit.component.html',
   styleUrls: ['./suppliers-edit.component.css'],
