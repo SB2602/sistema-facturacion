@@ -94,9 +94,14 @@
   </mat-form-field>
 
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Registrar proveedor'" (click)="onSubmit()">
+    <button
+      mat-fab
+      extended
+      [attr.aria-label]="'Registrar proveedor'"
+      (click)="onSubmit()"
+    >
       <mat-icon>add</mat-icon>
-   mat-icontrar
+      Registrar
     </button>
 
     <a routerLink="/suppliers/index">
