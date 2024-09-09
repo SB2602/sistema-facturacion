@@ -12,7 +12,7 @@ import { CategoriesAddComponent } from './componentes/categories/categories-add/
 import { CategoriesIndexComponent } from './componentes/categories/categories-index/categories-index.component';
 import { ProductsEditComponent } from './componentes/products/products-edit/products-edit.component';
 import { CategoriesEditComponent } from './componentes/categories/categories-edit/categories-edit.component';
-
+import { SuppliersEditComponent } from './componentes/suppliers/suppliers-edit/suppliers-edit.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, title: 'Login' },
