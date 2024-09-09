@@ -1,5 +1,5 @@
 export interface Suppliers {
-  id: number;
+  id?:number;
   ruc: string;
   nombre: string;
   apellido: string;
