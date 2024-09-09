@@ -1,1 +1,89 @@
-<p>suppliers-edit works!</p>
+<form class="add-form" [formGroup]="supplierForm">
+  <h2 class="title">Editar Proveedor</h2>
+
+  <mat-form-field class="full-width">
+    <mat-label>RUC</mat-label>
+    <input matInput formControlName="ruc" />
+    <mat-error *ngIf="supplierForm.get('ruc')?.hasError('required')">
+      El RUC es requerido.
+    </mat-error>
+    <mat-error *ngIf="supplierForm.get('ruc')?.hasError('pattern')">
+      Solo se permiten números.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" placeholder="Ex. John" />
+    <mat-error *ngIf="supplierForm.get('nombre')?.hasError('required')">
+      El nombre es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Apellido</mat-label>
+    <input matInput formControlName="apellido" placeholder="Ex. Doe" />
+    <mat-error *ngIf="supplierForm.get('apellido')?.hasError('required')">
+      El apellido es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Correo</mat-label>
+    <input
+      matInput
+      type="email"
+      formControlName="correo"
+      placeholder="Ex. mail@example.com"
+    />
+    <mat-error *ngIf="supplierForm.get('correo')?.hasError('required')">
+      El correo es requerido.
+    </mat-error>
+    <mat-error *ngIf="supplierForm.get('correo')?.hasError('email')">
+      Por favor, ingrese una dirección de correo válida.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="telefono" placeholder="Ex. +1234567890" />
+    <mat-error *ngIf="supplierForm.get('telefono')?.hasError('required')">
+      El teléfono es requerido.
+    </mat-error>
+    <mat-error *ngIf="supplierForm.get('telefono')?.hasError('pattern')">
+      El formato del teléfono no es válido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Dirección</mat-label>
+    <input
+      matInput
+      formControlName="direccion"
+      placeholder="Ex. Calle Falsa 123"
+    />
+    <mat-error *ngIf="supplierForm.get('direccion')?.hasError('required')">
+      La dirección es requerida.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button
+      mat-fab
+      extended
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!supplierForm.valid"
+    >
+      <mat-icon>edit</mat-icon>
+      Editar Proveedor
+    </button>
+
+    <a routerLink="/suppliers/index">
+      <button mat-fab extended color="warn">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
+  </div>
+</form>

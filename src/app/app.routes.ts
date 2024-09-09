@@ -44,9 +44,9 @@ export const routes: Routes = [
   },
 
   {
-    path: 'products/index',
-    component: ProductsIndexComponent,
-    title: 'Indice de Productos',
+    path: 'suppliers/edit/:id',
+    component: SuppliersEditComponent,
+    title: 'Editar Proveedor',
   },
   {
     path: 'products/add',
