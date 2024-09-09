@@ -41,7 +41,7 @@ export const routes: Routes = [
     title: 'Registrar Usuario',
   },
   {
-    path: 'suppliers/edit',
+    path: 'suppliers/edit/:id',
     component: SuppliersEditComponent,
     title: 'Editar Proveedor',
   },

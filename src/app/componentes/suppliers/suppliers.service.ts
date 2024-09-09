@@ -25,8 +25,8 @@ export class SuppliersService {
     return this.http.post<Suppliers>(this.apiUrl, supplier);
   }
 
-  updateSupplier(supplier: Suppliers): Observable<Suppliers> {
-    return this.http.put<Suppliers>(this.apiUrl, supplier);
+  updateSupplier(id: number, supplier: Suppliers): Observable<Suppliers> {
+    return this.http.put<Suppliers>(`${this.apiUrl}/${id}`, supplier); // Asegúrate de que `${this.apiUrl}/${id}` sea correcto
   }
 
   deleteSupplier(id: number): Observable<void> {
@@ -34,6 +34,8 @@ export class SuppliersService {
   }
 
   refreshSuppliers() {
-    this.getSuppliers().subscribe(suppliers => this.suppliersSubject.next(suppliers));
+    this.getSuppliers().subscribe((suppliers) =>
+      this.suppliersSubject.next(suppliers)
+    );
   }
 }
