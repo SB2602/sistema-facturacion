@@ -1,1 +1,41 @@
-<p>categories-edit works!</p>
+<form class="add-form" [formGroup]="categoryForm">
+  <h2 class="title">Editar Categoría</h2>
+
+  <mat-form-field class="full-width">
+    <mat-label>Nombre de la Categoría</mat-label>
+    <input matInput formControlName="nombre_categorias" />
+    <mat-error
+      *ngIf="categoryForm.get('nombre_categorias')?.hasError('required')"
+    >
+      El nombre de la categoría es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="descripcion"></textarea>
+    <mat-error *ngIf="categoryForm.get('descripcion')?.hasError('required')">
+      La descripción es requerida.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button
+      mat-fab
+      extended
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!categoryForm.valid"
+    >
+      <mat-icon>edit</mat-icon>
+      Editar Categoría
+    </button>
+
+    <a routerLink="/categories/index">
+      <button mat-fab extended color="warn">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
+  </div>
+</form>

@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { ProductsAddComponent } from './componentes/products/products-add/products-add.component';
+import { ProductsEditComponent } from './componentes/products/products-edit/products-edit.component';
 import { ProductsIndexComponent } from './componentes/products/products-index/products-index.component';
 import { CategoriesAddComponent } from './componentes/categories/categories-add/categories-add.component';
-import { CategoriesIndexComponent } from './componentes/categories/categories-index/categories-index.component';
-import { ProductsEditComponent } from './componentes/products/products-edit/products-edit.component';
 import { CategoriesEditComponent } from './componentes/categories/categories-edit/categories-edit.component';
+import { CategoriesIndexComponent } from './componentes/categories/categories-index/categories-index.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,7 +24,7 @@ export const routes: Routes = [
     title: 'Registrar Producto',
   },
   {
-    path: 'products/edit',
+    path: 'products/edit/:id',
     component: ProductsEditComponent,
     title: 'Editar producto',
   },
@@ -39,7 +39,7 @@ export const routes: Routes = [
     title: 'Registrar categoria',
   },
   {
-    path: 'categories/edit',
+    path: 'categories/edit/:id',
     component: CategoriesEditComponent,
     title: 'Editar categoria',
   },

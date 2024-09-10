@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Categories } from '../../interfaces/categories';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { Categories } from '../../interfaces/categories';
 })
 export class CategoriesService {
   private apiUrl = 'http://localhost:8080/api/v1/categories';
+  private categoriesSubject = new BehaviorSubject<Categories[]>([]);
+  suppliers$ = this.categoriesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -23,11 +25,17 @@ export class CategoriesService {
     return this.http.post<Categories>(this.apiUrl, category);
   }
 
-  updateCategory(category: Categories): Observable<Categories> {
-    return this.http.put<Categories>(this.apiUrl, category);
+  updateCategory(id: number, category: Categories): Observable<Categories> {
+    return this.http.put<Categories>(`${this.apiUrl}/${id}`, category); // Asegúrate de que `${this.apiUrl}/${id}` sea correcto
   }
 
   deleteCategory(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  refreshCategories() {
+    this.getCategories().subscribe((categories) =>
+      this.categoriesSubject.next(categories)
+    );
   }
 }
