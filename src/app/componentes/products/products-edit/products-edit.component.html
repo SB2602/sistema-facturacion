@@ -1,1 +1,67 @@
-<p>products-edit works!</p>
+<form class="add-form" [formGroup]="productForm">
+  <h2 class="title">Editar Producto</h2>
+
+  <mat-form-field class="full-width">
+    <mat-label>Nombre del Producto</mat-label>
+    <input matInput formControlName="nombre_producto" />
+    <mat-error *ngIf="productForm.get('nombre_producto')?.hasError('required')">
+      El nombre del producto es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="descripcion"></textarea>
+    <mat-error *ngIf="productForm.get('descripcion')?.hasError('required')">
+      La descripción es requerida.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Precio</mat-label>
+    <input matInput type="number" formControlName="precio" />
+    <mat-error *ngIf="productForm.get('precio')?.hasError('required')">
+      El precio es requerido.
+    </mat-error>
+    <mat-error *ngIf="productForm.get('precio')?.hasError('min')">
+      El precio debe ser mayor a 0.
+    </mat-error>
+    <mat-error *ngIf="productForm.get('precio')?.hasError('pattern')">
+      El formato del precio no es válido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Stock</mat-label>
+    <input matInput type="number" formControlName="stock" />
+    <mat-error *ngIf="productForm.get('stock')?.hasError('required')">
+      El stock es requerido.
+    </mat-error>
+    <mat-error *ngIf="productForm.get('stock')?.hasError('min')">
+      El stock debe ser al menos 0.
+    </mat-error>
+    <mat-error *ngIf="productForm.get('stock')?.hasError('pattern')">
+      El formato del stock no es válido.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button
+      mat-fab
+      extended
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!productForm.valid"
+    >
+      <mat-icon>edit</mat-icon>
+      Editar Producto
+    </button>
+
+    <a routerLink="/products/index">
+      <button mat-fab extended color="warn">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
+  </div>
+</form>

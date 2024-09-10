@@ -9,7 +9,7 @@ import { Categories } from '../../interfaces/categories';
 export class CategoriesService {
   private apiUrl = 'http://localhost:8080/api/v1/categories';
   private categoriesSubject = new BehaviorSubject<Categories[]>([]);
-  suppliers$ = this.categoriesSubject.asObservable();
+  categories$ = this.categoriesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
