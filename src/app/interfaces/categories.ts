@@ -1,6 +1,5 @@
 export interface Categories {
-  id: number;
+  id?: number;
   nombre_categorias: string;
   descripcion: string;
-  estado: boolean;
 }

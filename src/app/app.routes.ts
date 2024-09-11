@@ -64,7 +64,7 @@ export const routes: Routes = [
     title: 'Registrar Producto',
   },
   {
-    path: 'products/edit',
+    path: 'products/edit/:id',
     component: ProductsEditComponent,
     title: 'Editar producto',
   },
@@ -79,7 +79,7 @@ export const routes: Routes = [
     title: 'Registrar categoria',
   },
   {
-    path: 'categories/edit',
+    path: 'categories/edit/:id',
     component: CategoriesEditComponent,
     title: 'Editar categoria',
   },

@@ -5,36 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { Products } from '../../../interfaces/products';
+import { ProductsService } from '../products.service';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
-
-const ELEMENT_DATA: Products[] = [
-  {
-    id: 1,
-    nombre_producto: 'Laptop ASUS',
-    descripcion:
-      'Laptop ASUS de 15 pulgadas con procesador Intel i7 y 16GB de RAM.',
-    precio: 1500.0,
-    stock: 10,
-    estado: true,
-  },
-  {
-    id: 2,
-    nombre_producto: 'Mouse Logitech',
-    descripcion:
-      'Mouse inalámbrico Logitech con batería recargable y sensor óptico.',
-    precio: 50.0,
-    stock: 50,
-    estado: true,
-  },
-  {
-    id: 3,
-    nombre_producto: 'Monitor Samsung',
-    descripcion: 'Monitor Samsung de 24 pulgadas con resolución Full HD.',
-    precio: 200.0,
-    stock: 5,
-    estado: false,
-  },
-];
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-index',
@@ -46,7 +19,10 @@ const ELEMENT_DATA: Products[] = [
     MatButtonModule,
     RouterLink,
     CommonModule,
+    CommonModule,
+    HttpClientModule,
   ],
+  providers: [ProductsService],
   templateUrl: './products-index.component.html',
   styleUrl: './products-index.component.css',
 })
@@ -57,11 +33,21 @@ export class ProductsIndexComponent {
     'descripcion',
     'precio',
     'stock',
-    'estado',
     'acciones',
   ];
 
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Products>([]);
+  constructor(private productsService: ProductsService) {} // Inyecta el servicio
+  ngOnInit() {
+    this.productsService.getProducts().subscribe(
+      (data) => {
+        this.dataSource.data = data;
+      },
+      (error) => {
+        console.error('Error al cargar los productos', error);
+      }
+    );
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -69,9 +55,11 @@ export class ProductsIndexComponent {
   }
   // Método para eliminar un cliente por su ID
   deleteProduct(id: number): void {
-    this.dataSource.data = this.dataSource.data.filter(
-      (product) => product.id !== id
-    );
-    console.log(`Producto con id ${id} eliminado`);
+    this.productsService.deleteProduct(id).subscribe(() => {
+      this.dataSource.data = this.dataSource.data.filter(
+        (product) => product.id !== id
+      );
+      console.log('Producto con id ${id} eliminado');
+    });
   }
 }
