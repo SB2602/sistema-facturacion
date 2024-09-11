@@ -1,45 +1,36 @@
-<form class="add-form">
+<form class="add-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <h2 class="title">Registrar Usuario</h2>
+
   <mat-form-field class="full-width">
     <mat-label>Nombre</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="nameFormControl"
-      placeholder="Ex. John"
-    />
-    @if (nameFormControl.hasError('required')) {
-    <mat-error>El nombre es requerido</mat-error>
-    }
+    <input matInput formControlName="nombre" placeholder="Ex. John" />
+    <mat-error *ngIf="userForm.get('nombre')?.hasError('required')">
+      El nombre es requerido.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Apellido</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="surnameFormControl"
-      placeholder="Ex. Doe"
-    />
-    @if (surnameFormControl.hasError('required')) {
-    <mat-error>El apellido es requerido</mat-error>
-    }
+    <input matInput formControlName="apellido" placeholder="Ex. Doe" />
+    <mat-error *ngIf="userForm.get('apellido')?.hasError('required')">
+      El apellido es requerido.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Email</mat-label>
     <input
-      type="email"
       matInput
-      [formControl]="emailFormControl"
+      type="email"
+      formControlName="correo"
       placeholder="Ex. mail@example.com"
     />
-    @if (emailFormControl.hasError('email') &&
-    !emailFormControl.hasError('required')) {
-    <mat-error>Please enter a valid email address</mat-error>
-    } @if (emailFormControl.hasError('required')) {
-    <mat-error>El email es requerido</mat-error>
-    }
+    <mat-error *ngIf="userForm.get('correo')?.hasError('required')">
+      El correo es requerido.
+    </mat-error>
+    <mat-error *ngIf="userForm.get('correo')?.hasError('email')">
+      Por favor, ingrese una dirección de correo válida.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
@@ -47,17 +38,16 @@
     <input
       matInput
       [type]="hide() ? 'password' : 'text'"
-      [formControl]="passwordFormControl"
+      formControlName="contraseña"
     />
-    @if (passwordFormControl.hasError('required')) {
-    <mat-error>La contraseña es requerida</mat-error>
-    }
+    <mat-error *ngIf="userForm.get('contraseña')?.hasError('required')">
+      La contraseña es requerida.
+    </mat-error>
     <button
       mat-icon-button
       matSuffix
-      (click)="clickEvent($event)"
-      [attr.aria-label]="'Esconder contraseña'"
-      [attr.aria-pressed]="hide()"
+      (click)="togglePasswordVisibility()"
+      [attr.aria-label]="'Mostrar contraseña'"
     >
       <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
@@ -65,25 +55,31 @@
 
   <mat-form-field class="full-width">
     <mat-label>Rol del Usuario</mat-label>
-    <mat-select [formControl]="roleControl" required>
-      <mat-option>--</mat-option>
-      @for (role of roles; track role) {
-      <mat-option [value]="role">{{ role.name }}</mat-option>
-      }
+    <mat-select formControlName="role" required>
+      <mat-option *ngFor="let role of roles" [value]="role">
+        {{ role.name }}
+      </mat-option>
     </mat-select>
-    @if (roleControl.hasError('required')) {
-    <mat-error>El rol es requerido</mat-error>
-    }
+    <mat-error *ngIf="userForm.get('role')?.hasError('required')">
+      El rol es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="estado">
+      <mat-option [value]="true">Activo</mat-option>
+      <mat-option [value]="false">Inactivo</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Registrar usuario'">
+    <button mat-fab extended color="primary" [disabled]="!userForm.valid">
       <mat-icon>add</mat-icon>
-      Registrar
+      Registrar Usuario
     </button>
-
     <a routerLink="/user/index">
-      <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+      <button mat-fab extended color="warn">
         <mat-icon>close</mat-icon>
         Cancelar
       </button>

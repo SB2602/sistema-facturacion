@@ -8,36 +8,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 
 const ELEMENT_DATA: User[] = [
-  {
-    id: 1,
-    nombre: 'Juan',
-    apellido: 'Pérez',
-    correo: 'juan.perez@ejemplo.com',
-    contraseña: '123456',
-    rol: 'admin',
-    fecha_creacion: new Date('2022-01-01'),
-    estado: true,
-  },
-  {
-    id: 2,
-    nombre: 'María',
-    apellido: 'Gómez',
-    correo: 'maria.gomez@ejemplo.com',
-    contraseña: 'abcdef',
-    rol: 'vendedor',
-    fecha_creacion: new Date('2022-02-01'),
-    estado: true,
-  },
-  {
-    id: 3,
-    nombre: 'Pedro',
-    apellido: 'Rodríguez',
-    correo: 'pedro.rodriguez@ejemplo.com',
-    contraseña: '987654',
-    rol: 'admin',
-    fecha_creacion: new Date('2022-03-01'),
-    estado: false,
-  },
+ 
 ];
 @Component({
   selector: 'app-index',
