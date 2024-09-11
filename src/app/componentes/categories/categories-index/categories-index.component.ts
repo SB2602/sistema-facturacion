@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { CategoriesService } from '../categories.service'; // Importa el servicio
 import { HttpClientModule } from '@angular/common/http';
 
+// Componente para listar las categorias
 @Component({
   selector: 'app-index',
   standalone: true,
