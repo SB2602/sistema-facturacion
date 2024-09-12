@@ -22,8 +22,8 @@ import { ProductsService } from '../../products/products.service';
 import { Products } from '../../../interfaces/products';
 import { AddProductDialogComponent } from '../../../add-product-dialog/add-product-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
+import { InvoicesService } from '../invoices.service';
+import { invoices } from '../../../interfaces/invoices';
 @Component({
   selector: 'app-invoices-add',
   standalone: true,
@@ -71,8 +71,8 @@ export class InvoicesAddComponent {
   constructor(
     private clientsService: ClientsService,
     private productsService: ProductsService,
-    private dialog: MatDialog
-    
+    private dialog: MatDialog,
+    private invoicesService: InvoicesService,
   ) {}
 
   ngOnInit() {
@@ -133,5 +133,40 @@ export class InvoicesAddComponent {
   getTotal(): number {
     return this.getSubtotal() + this.getTax();
   }
+  registerInvoice() {
+    if (this.nameFormControl.invalid || this.dateFormControl.invalid || this.selectedClientId === null) {
+      return; // Validaciones simples, puedes mejorar esto con mensajes de error
+    }
   
+    // Asegúrate de que el valor no sea null y conviértelo a string
+    const numeroFactura = this.nameFormControl.value ?? ''; // Si es null, usa una cadena vacía
+  
+    // Convierte el valor de fecha a Date
+    const fecha = new Date(this.dateFormControl.value);
+  
+    // Asegúrate de que la conversión sea válida
+    if (isNaN(fecha.getTime())) {
+      console.error('Fecha inválida');
+      return;
+    }
+  
+    const invoice: invoices = {
+      numero_factura: numeroFactura,
+      fecha: fecha, // Asigna la fecha convertida
+      cliente: { id: this.selectedClientId } as Clients, // Solo enviamos el id del cliente
+      total: this.getTotal()
+    };
+  
+    // Imprime el objeto invoice en la consola para verificar
+    console.log('Enviando al backend:', invoice);
+  
+    this.invoicesService.addInvoice(invoice).subscribe(
+      () => {
+        console.log('Factura registrada con éxito');
+      },
+      (error) => {
+        console.error('Error al registrar la factura', error);
+      }
+    );
+  }
 }

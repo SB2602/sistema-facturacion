@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { InvoicesService } from '../invoices.service';
+import { invoices } from '../../../interfaces/invoices';
+
 @Component({
   selector: 'app-invoices-index',
   standalone: true,
@@ -17,9 +20,9 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './invoices-index.component.html',
-  styleUrl: './invoices-index.component.css',
+  styleUrls: ['./invoices-index.component.css'],
 })
-export class InvoicesIndexComponent {
+export class InvoicesIndexComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'numero_factura',
@@ -29,7 +32,26 @@ export class InvoicesIndexComponent {
     'acciones'
   ];
 
-  applyFilter(event: Event) {}
-  // Método para eliminar un cliente por su ID
-  deleteInvoice(id: number): void {}
+  dataSource: invoices[] = [];
+
+  constructor(private invoicesService: InvoicesService) {}
+
+  ngOnInit(): void {
+    this.invoicesService.getInvoices().subscribe((invoices) => {
+      this.dataSource = invoices;
+      console.log('Invoices:', this.dataSource);  // Mensaje en consola para verificar datos
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    // Implementar lógica de filtrado aquí
+  }
+
+  deleteInvoice(id: number): void {
+    this.invoicesService.deleteInvoice(id).subscribe(() => {
+      // Actualizar la tabla después de eliminar
+      this.dataSource = this.dataSource.filter(invoice => invoice.id !== id);
+    });
+  }
 }

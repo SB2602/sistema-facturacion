@@ -19,7 +19,7 @@ import { ClientsEditComponent } from './componentes/clients/clients-edit/clients
 
 import { InvoicesIndexComponent } from './componentes/invoices/invoices-index/invoices-index.component';
 import { InvoicesAddComponent } from './componentes/invoices/invoices-add/invoices-add.component';
-import { InvoicesEditComponent } from './componentes/invoices/invoices-edit/invoices-edit.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -117,9 +117,5 @@ export const routes: Routes = [
     title: 'Agregar factura',
   },
 
-  {
-    path: 'invoices/edit/:id',
-    component: InvoicesEditComponent,
-    title: 'Editar factura',
-  },
+
 ];

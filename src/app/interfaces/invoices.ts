@@ -4,6 +4,6 @@ export interface invoices{
     id?:number;
     numero_factura:string;
     fecha:Date;
-    client:Clients;
+    cliente:Clients;
     total:number;
 }
