@@ -31,7 +31,7 @@ export const routes: Routes = [
     title: 'Registrar Usuario',
   },
   {
-    path: 'user/edit',
+    path: 'user/edit/:id',
     component: UserEditComponent,
     title: 'Editar Usuario',
   },

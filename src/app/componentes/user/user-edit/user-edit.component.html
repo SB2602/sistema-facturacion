@@ -1,1 +1,85 @@
-<p>user-edit works!</p>
+<form class="edit-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <h2 class="title">Editar Usuario</h2>
+
+  <mat-form-field class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" placeholder="Ex. John" />
+    <mat-error *ngIf="userForm.get('nombre')?.hasError('required')">
+      El nombre es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Apellido</mat-label>
+    <input matInput formControlName="apellido" placeholder="Ex. Doe" />
+    <mat-error *ngIf="userForm.get('apellido')?.hasError('required')">
+      El apellido es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      type="email"
+      formControlName="correo"
+      placeholder="Ex. mail@example.com"
+    />
+    <mat-error *ngIf="userForm.get('correo')?.hasError('required')">
+      El correo es requerido.
+    </mat-error>
+    <mat-error *ngIf="userForm.get('correo')?.hasError('email')">
+      Por favor, ingrese una dirección de correo válida.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Contraseña</mat-label>
+    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="contraseña" placeholder="Ingrese contraseña" />
+    <mat-error *ngIf="userForm.get('contraseña')?.hasError('required')">
+      La contraseña es requerida.
+    </mat-error>
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="togglePasswordVisibility()"
+      [attr.aria-label]="'Mostrar contraseña'"
+    >
+      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Rol del Usuario</mat-label>
+    <mat-select formControlName="role" required>
+      <mat-option *ngFor="let role of roles" [value]="role">
+        {{ role.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="userForm.get('role')?.hasError('required')">
+      El rol es requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="estado">
+      <mat-option [value]="true">Activo</mat-option>
+      <mat-option [value]="false">Inactivo</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button mat-fab extended color="primary" [disabled]="!userForm.valid">
+      <mat-icon>save</mat-icon>
+      Modificar Usuario
+    </button>
+    <a routerLink="/user/index">
+      <button mat-fab extended color="warn">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
+  </div>
+</form>

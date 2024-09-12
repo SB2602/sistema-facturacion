@@ -29,8 +29,8 @@ export class UserService {
   }
 
   // Actualizar un usuario existente
-  updateUser(id: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, user); // Actualiza el usuario por ID
+  updateUser(userId: number, userData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${userId}`, userData);
   }
 
   // Eliminar un usuario por su ID

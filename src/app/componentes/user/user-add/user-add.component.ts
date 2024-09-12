@@ -80,6 +80,8 @@ export class UserAddComponent {
       this.userService.addUser(newUser).subscribe({
         next: (response) => {
           console.log('Usuario registrado:', response);
+          this.userService.refreshUsers(); // Actualiza la lista en el servicio
+          this.router.navigate(['/user/index']); // Redirige al listado de proveedores
         },
         error: (error) => {
           console.error('Error al registrar el usuario:', error);
