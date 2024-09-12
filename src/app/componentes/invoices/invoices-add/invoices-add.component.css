@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5rem;
+  padding:1rem 10rem 10rem 10rem;
+
 }
 
 .full-width {
@@ -18,4 +19,15 @@
 
 .buttons > * {
   margin: 1rem;
+}
+
+.spacer {
+  height: 50px;
+}
+
+.table {
+  margin-top: 30px;
+  border: 1px solid black;
+  width: 10%;
+  border-collapse: collapse;
 }
