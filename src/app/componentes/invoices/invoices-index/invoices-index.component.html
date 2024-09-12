@@ -27,13 +27,14 @@
             </ng-container>
             <ng-template #actionsTemplate>
               <div class="action-buttons">
+                <!--
                 <button
                   mat-icon-button
-                  [routerLink]="['/invoices/edit', element.id]"
-                  class="buttonedit"
+                  (click)="openDetails(element.id)"
+                  class="buttondetails"
                 >
                   <mat-icon>search</mat-icon>
-                </button>
+                </button>-->
                 <button
                   mat-icon-button
                   (click)="deleteInvoice(element.id)"

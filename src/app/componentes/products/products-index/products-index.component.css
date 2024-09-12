@@ -49,3 +49,26 @@
 .buttondelete {
   color: #e15639;
 }
+
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table td {
+  border-bottom: 1px solid #151414;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 2px; /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones dentro del contenedor, opcional */
+}
+
+.buttonedit {
+  color: #1f516f;
+}
+
+.buttondelete {
+  color: #e15639;
+}

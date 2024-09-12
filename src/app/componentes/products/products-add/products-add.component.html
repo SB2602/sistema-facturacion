@@ -1,6 +1,7 @@
 <form class="add-form">
   <h2 class="title">Registrar Producto</h2>
 
+  <!-- Nombre del Producto -->
   <mat-form-field class="full-width">
     <mat-label>Nombre del Producto</mat-label>
     <input
@@ -14,6 +15,7 @@
     </mat-error>
   </mat-form-field>
 
+  <!-- Descripción -->
   <mat-form-field class="full-width">
     <mat-label>Descripción</mat-label>
     <input
@@ -27,6 +29,7 @@
     </mat-error>
   </mat-form-field>
 
+  <!-- Precio -->
   <mat-form-field class="full-width">
     <mat-label>Precio</mat-label>
     <input
@@ -46,6 +49,7 @@
     </mat-error>
   </mat-form-field>
 
+  <!-- Stock -->
   <mat-form-field class="full-width">
     <mat-label>Stock</mat-label>
     <input
@@ -62,6 +66,33 @@
     </mat-error>
   </mat-form-field>
 
+  <!-- Seleccionar Proveedor -->
+  <mat-form-field class="full-width">
+    <mat-label>Proveedor</mat-label>
+    <mat-select [formControl]="supplierFormControl">
+      <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+        {{ supplier.ruc }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="supplierFormControl.hasError('required')">
+      El proveedor es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Seleccionar Categoría -->
+  <mat-form-field class="full-width">
+    <mat-label>Categoría</mat-label>
+    <mat-select [formControl]="categoryFormControl">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
+        {{ category.nombre_categorias }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="categoryFormControl.hasError('required')">
+      La categoría es requerida
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Botones -->
   <div class="buttons">
     <button
       mat-fab

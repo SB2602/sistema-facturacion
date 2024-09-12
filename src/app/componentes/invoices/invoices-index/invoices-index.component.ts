@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { InvoicesService } from '../invoices.service';
 import { invoices } from '../../../interfaces/invoices';
-
+import { InvoiceDetailsComponent } from '../../../invoice-details/invoice-details.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-invoices-index',
   standalone: true,
@@ -34,7 +35,10 @@ export class InvoicesIndexComponent implements OnInit {
 
   dataSource: invoices[] = [];
 
-  constructor(private invoicesService: InvoicesService) {}
+  constructor(
+    private invoicesService: InvoicesService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.invoicesService.getInvoices().subscribe((invoices) => {
@@ -52,6 +56,16 @@ export class InvoicesIndexComponent implements OnInit {
     this.invoicesService.deleteInvoice(id).subscribe(() => {
       // Actualizar la tabla después de eliminar
       this.dataSource = this.dataSource.filter(invoice => invoice.id !== id);
+    });
+  }
+  openDetails(invoiceId: number): void {
+    const dialogRef = this.dialog.open(InvoiceDetailsComponent, {
+      width: '600px',
+      data: { invoiceId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
     });
   }
 }

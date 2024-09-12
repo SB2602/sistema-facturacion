@@ -1,0 +1,49 @@
+<div class="invoice-details">
+    <h2>Detalles de la Factura</h2>
+  
+    <!-- Tabla de detalles de la factura -->
+    <table mat-table [dataSource]="invoiceDetails" class="mat-elevation-z8">
+  
+      <!-- Definición de columnas -->
+      <ng-container matColumnDef="id_producto">
+        <th mat-header-cell *matHeaderCellDef>ID Producto</th>
+        <td mat-cell *matCellDef="let detail">{{ detail.product.id }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombre_producto">
+        <th mat-header-cell *matHeaderCellDef>Nombre Producto</th>
+        <td mat-cell *matCellDef="let detail">{{ detail.product.name }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef>Cantidad</th>
+        <td mat-cell *matCellDef="let detail">{{ detail.cantidad }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="precio_unitario">
+        <th mat-header-cell *matHeaderCellDef>Precio Unitario</th>
+        <td mat-cell *matCellDef="let detail">{{ detail.precio_unitario | currency }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="subtotal">
+        <th mat-header-cell *matHeaderCellDef>Subtotal</th>
+        <td mat-cell *matCellDef="let detail">{{ detail.subtotal | currency }}</td>
+      </ng-container>
+  
+      <!-- Fila de cabecera -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- Fila de datos -->
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  
+    <!-- Botones para volver o editar -->
+    <div class="buttons">
+      <a routerLink="/invoices">
+        <button mat-raised-button color="primary">
+          <mat-icon>keyboard_return</mat-icon>
+          Volver
+        </button>
+      </a>
+    </div>
+  </div>
+  

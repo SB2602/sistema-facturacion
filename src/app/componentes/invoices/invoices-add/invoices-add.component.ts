@@ -24,6 +24,7 @@ import { AddProductDialogComponent } from '../../../add-product-dialog/add-produ
 import { MatDialogModule } from '@angular/material/dialog';
 import { InvoicesService } from '../invoices.service';
 import { invoices } from '../../../interfaces/invoices';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-invoices-add',
   standalone: true,
@@ -52,7 +53,6 @@ export class InvoicesAddComponent {
   ]);
   numberFormControl = new FormControl('', { nonNullable: true });
   dateFormControl = new FormControl('', { nonNullable: true });
- 
   clients: Clients[] = [];
   selectedClientId: number | null = null;
 
@@ -73,6 +73,7 @@ export class InvoicesAddComponent {
     private productsService: ProductsService,
     private dialog: MatDialog,
     private invoicesService: InvoicesService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -87,6 +88,7 @@ export class InvoicesAddComponent {
     this.productsService.getProducts().subscribe((products) => {
       const dialogRef = this.dialog.open(AddProductDialogComponent, {
         width: '400px',
+    
         data: { products },
       });
 
@@ -163,6 +165,8 @@ export class InvoicesAddComponent {
     this.invoicesService.addInvoice(invoice).subscribe(
       () => {
         console.log('Factura registrada con éxito');
+        this.invoicesService.refreshInvoice();
+        this.router.navigate(['/invoices/index']);
       },
       (error) => {
         console.error('Error al registrar la factura', error);

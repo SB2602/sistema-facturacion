@@ -9,10 +9,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-add-product-dialog',
   standalone: true,
-  imports:[MatDialogModule,MatFormFieldModule,MatSelectModule,ReactiveFormsModule,MatOptionModule,MatInputModule,CommonModule],
+  imports:[MatDialogModule,MatFormFieldModule,MatSelectModule,ReactiveFormsModule,MatOptionModule,MatInputModule,CommonModule,MatIcon],
   templateUrl: './add-product-dialog.component.html',
   styleUrls: ['./add-product-dialog.component.css']
 })

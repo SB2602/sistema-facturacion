@@ -8,6 +8,7 @@ import { Products } from '../../interfaces/products';
 })
 export class ProductsService {
   private apiUrl = 'http://localhost:8080/api/v1/products';
+
   private productsSubject = new BehaviorSubject<Products[]>([]);
   products$ = this.productsSubject.asObservable();
 
@@ -24,6 +25,7 @@ export class ProductsService {
   addProduct(product: Products): Observable<Products> {
     return this.http.post<Products>(this.apiUrl, product);
   }
+
   updateProduct(id: number, product: Products): Observable<Products> {
     return this.http.put<Products>(`${this.apiUrl}/${id}`, product); // Asegúrate de que ${this.apiUrl}/${id} sea correcto
   }

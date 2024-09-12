@@ -4,4 +4,6 @@ export interface Products {
   descripcion: string;
   precio: number;
   stock: number;
+  supplierId?: number; // Suponiendo que solo tienes el ID del cliente
+  categoryId?: number;
 }

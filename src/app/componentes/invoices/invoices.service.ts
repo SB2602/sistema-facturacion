@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { invoices } from '../../interfaces/invoices';
 
 @Injectable({
@@ -8,7 +8,8 @@ import { invoices } from '../../interfaces/invoices';
 })
 export class InvoicesService {
   private apiUrl = 'http://localhost:8080/api/v1/invoices';
-
+  private invoicesSubject = new BehaviorSubject<invoices[]>([]);
+  invoices$ = this.invoicesSubject.asObservable();
   constructor(private http: HttpClient) {}
 
   // Obtener todas las facturas
@@ -34,5 +35,9 @@ export class InvoicesService {
   // Eliminar una factura
   deleteInvoice(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  refreshInvoice() {
+    this.getInvoices().subscribe((invoices) => this.invoicesSubject.next(invoices));
   }
 }
