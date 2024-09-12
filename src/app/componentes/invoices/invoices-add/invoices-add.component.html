@@ -1,0 +1,47 @@
+<form class="add-form">
+  <h2 class="title">Registrar Factura</h2>
+  <mat-form-field class="full-width">
+    <mat-label>Numero de factura</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="nameFormControl"
+      placeholder="001"
+    />
+    <mat-error *ngIf="nameFormControl.hasError('required')">
+      El numero de factura es requerido
+    </mat-error>
+  </mat-form-field>
+   <!-- Campo para la fecha -->
+   <mat-form-field class="full-width">
+    <mat-label>Fecha de la factura</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [formControl]="dateFormControl"
+      placeholder="Elige una fecha"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="picker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="dateFormControl.hasError('required')">
+      La fecha es requerida
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Campo para seleccionar cliente -->
+  <mat-form-field class="full-width">
+    <mat-label>Cliente</mat-label>
+    <mat-select [(value)]="selectedClientId" formControlName="client">
+      <mat-option *ngFor="let client of clients" [value]="client.id">
+        {{ client.nombre }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="nameFormControl.hasError('required')">
+      El cliente es requerido
+    </mat-error>
+  </mat-form-field>
+
+</form>

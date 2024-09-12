@@ -1,102 +1,77 @@
-<form class="add-form">
+<form class="add-form" [formGroup]="clientForm">
   <h2 class="title">Editar Cliente</h2>
 
   <mat-form-field class="full-width">
     <mat-label>RUC</mat-label>
-    <input matInput [formControl]="rucFormControl" />
-    <mat-error *ngIf="rucFormControl.hasError('required')">
+    <input matInput formControlName="ruc" />
+    <mat-error *ngIf="clientForm.get('ruc')?.hasError('required')">
       El RUC es requerido.
     </mat-error>
-    <mat-error *ngIf="rucFormControl.hasError('pattern')">
-      Solo se permiten números.
+    <mat-error *ngIf="clientForm.get('ruc')?.hasError('pattern')">
+      El formato del RUC no es válido.
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Nombre</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="nameFormControl"
-      placeholder="Ex. John"
-    />
-    <mat-error *ngIf="nameFormControl.hasError('required')">
-      El nombre es requerido
+    <input matInput formControlName="nombre" />
+    <mat-error *ngIf="clientForm.get('nombre')?.hasError('required')">
+      El nombre es requerido.
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Apellido</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="surnameFormControl"
-      placeholder="Ex. Doe"
-    />
-    <mat-error *ngIf="surnameFormControl.hasError('required')">
-      El apellido es requerido
+    <input matInput formControlName="apellido" />
+    <mat-error *ngIf="clientForm.get('apellido')?.hasError('required')">
+      El apellido es requerido.
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Correo</mat-label>
-    <input
-      type="email"
-      matInput
-      [formControl]="emailFormControl"
-      placeholder="Ex. mail@example.com"
-    />
-    <mat-error
-      *ngIf="
-        emailFormControl.hasError('email') &&
-        !emailFormControl.hasError('required')
-      "
-    >
-      Por favor, ingrese una dirección de correo válida
+    <input matInput formControlName="correo" />
+    <mat-error *ngIf="clientForm.get('correo')?.hasError('required')">
+      El correo es requerido.
     </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      El correo es requerido
+    <mat-error *ngIf="clientForm.get('correo')?.hasError('email')">
+      El formato del correo no es válido.
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Teléfono</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="phoneFormControl"
-      placeholder="Ex. +1234567890"
-    />
-    <mat-error *ngIf="phoneFormControl.hasError('required')">
-      El teléfono es requerido
+    <input matInput formControlName="telefono" />
+    <mat-error *ngIf="clientForm.get('telefono')?.hasError('required')">
+      El teléfono es requerido.
     </mat-error>
-    <mat-error *ngIf="phoneFormControl.hasError('pattern')">
-      El formato del teléfono no es válido
+    <mat-error *ngIf="clientForm.get('telefono')?.hasError('pattern')">
+      El formato del teléfono no es válido.
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Dirección</mat-label>
-    <input
-      type="text"
-      matInput
-      [formControl]="addressFormControl"
-      placeholder="Ex. Calle Falsa 123"
-    />
-    <mat-error *ngIf="addressFormControl.hasError('required')">
-      La dirección es requerida
+    <input matInput formControlName="direccion" />
+    <mat-error *ngIf="clientForm.get('direccion')?.hasError('required')">
+      La dirección es requerida.
     </mat-error>
   </mat-form-field>
 
-
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Registrar cliente'">
-      <mat-icon>add</mat-icon>
-      Registrar
+    <button
+      mat-fab
+      extended
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!clientForm.valid"
+    >
+      <mat-icon>edit</mat-icon>
+      Editar Cliente
     </button>
 
     <a routerLink="/clients/index">
-      <button mat-fab extended [attr.aria-label]="'Cancelar registro'">
+      <button mat-fab extended color="warn">
         <mat-icon>close</mat-icon>
         Cancelar
       </button>

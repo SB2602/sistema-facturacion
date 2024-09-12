@@ -2,14 +2,30 @@
   <h2 class="title">Registrar Cliente</h2>
 
   <mat-form-field class="full-width">
+    <mat-label>RUC</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="rucFormControl"
+      placeholder="Ex. 12345678901"
+    />
+    <mat-error *ngIf="rucFormControl.hasError('required')">
+      El RUC es requerido
+    </mat-error>
+    <mat-error *ngIf="rucFormControl.hasError('pattern')">
+      El formato del RUC es incorrecto
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
     <mat-label>Nombre</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="nameFormControl"
-      placeholder="Ex. John"
+      [formControl]="nombreFormControl"
+      placeholder="Ex. Juan"
     />
-    <mat-error *ngIf="nameFormControl.hasError('required')">
+    <mat-error *ngIf="nombreFormControl.hasError('required')">
       El nombre es requerido
     </mat-error>
   </mat-form-field>
@@ -19,10 +35,10 @@
     <input
       type="text"
       matInput
-      [formControl]="surnameFormControl"
-      placeholder="Ex. Doe"
+      [formControl]="apellidoFormControl"
+      placeholder="Ex. Pérez"
     />
-    <mat-error *ngIf="surnameFormControl.hasError('required')">
+    <mat-error *ngIf="apellidoFormControl.hasError('required')">
       El apellido es requerido
     </mat-error>
   </mat-form-field>
@@ -32,30 +48,30 @@
     <input
       type="email"
       matInput
-      [formControl]="emailFormControl"
-      placeholder="Ex. mail@example.com"
+      [formControl]="correoFormControl"
+      placeholder="Ex. ejemplo@correo.com"
     />
-    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      Por favor, ingrese una dirección de correo válida
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
+    <mat-error *ngIf="correoFormControl.hasError('required')">
       El correo es requerido
+    </mat-error>
+    <mat-error *ngIf="correoFormControl.hasError('email')">
+      El formato del correo es incorrecto
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <mat-label>Teléfono</mat-label>
     <input
-      type="text"
+      type="tel"
       matInput
-      [formControl]="phoneFormControl"
-      placeholder="Ex. +1234567890"
+      [formControl]="telefonoFormControl"
+      placeholder="Ex. 987654321"
     />
-    <mat-error *ngIf="phoneFormControl.hasError('required')">
+    <mat-error *ngIf="telefonoFormControl.hasError('required')">
       El teléfono es requerido
     </mat-error>
-    <mat-error *ngIf="phoneFormControl.hasError('pattern')">
-      El formato del teléfono no es válido
+    <mat-error *ngIf="telefonoFormControl.hasError('pattern')">
+      El formato del teléfono es incorrecto
     </mat-error>
   </mat-form-field>
 
@@ -64,39 +80,30 @@
     <input
       type="text"
       matInput
-      [formControl]="addressFormControl"
+      [formControl]="direccionFormControl"
       placeholder="Ex. Calle Falsa 123"
     />
-    <mat-error *ngIf="addressFormControl.hasError('required')">
+    <mat-error *ngIf="direccionFormControl.hasError('required')">
       La dirección es requerida
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <mat-label>Estado</mat-label>
-    <mat-select [formControl]="statusFormControl" required>
-      <mat-option>--</mat-option>
-      <mat-option value="activo">Activo</mat-option>
-      <mat-option value="inactivo">Inactivo</mat-option>
-    </mat-select>
-    <mat-error *ngIf="statusFormControl.hasError('required')">
-      El estado es requerido
-    </mat-error>
-  </mat-form-field>
-
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Registrar cliente'">
+    <button
+      mat-fab
+      extended
+      [attr.aria-label]="'Registrar cliente'"
+      (click)="onSubmit()"
+    >
       <mat-icon>add</mat-icon>
       Registrar
     </button>
 
     <a routerLink="/clients/index">
-      <button mat-fab extended [attr.aria-label]="'Cancelar registro'">
+      <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
         <mat-icon>close</mat-icon>
         Cancelar
       </button>
     </a>
   </div>
 </form>
-
-  

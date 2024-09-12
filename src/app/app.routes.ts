@@ -16,6 +16,11 @@ import { SuppliersEditComponent } from './componentes/suppliers/suppliers-edit/s
 import { ClientsIndexComponent } from './componentes/clients/clients-index/clients-index.component';
 import { ClientsAddComponent } from './componentes/clients/clients-add/clients-add.component';
 import { ClientsEditComponent } from './componentes/clients/clients-edit/clients-edit.component';
+
+import { InvoicesIndexComponent } from './componentes/invoices/invoices-index/invoices-index.component';
+import { InvoicesAddComponent } from './componentes/invoices/invoices-add/invoices-add.component';
+import { InvoicesEditComponent } from './componentes/invoices/invoices-edit/invoices-edit.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, title: 'Login' },
@@ -95,8 +100,26 @@ export const routes: Routes = [
     title: 'Registrar cliente',
   },
   {
-    path: 'clients/edit',
+    path: 'clients/edit/:id',
     component: ClientsEditComponent,
     title: 'Editar cliente',
+  },
+
+  {
+    path: 'invoices/index',
+    component: InvoicesIndexComponent,
+    title: 'Indice de facturas',
+  },
+
+  {
+    path: 'invoices/add',
+    component: InvoicesAddComponent,
+    title: 'Agregar factura',
+  },
+
+  {
+    path: 'invoices/edit/:id',
+    component: InvoicesEditComponent,
+    title: 'Editar factura',
   },
 ];
