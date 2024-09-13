@@ -1,23 +1,27 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports:[FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  username: string = '';
+  password: string = '';
+
   constructor(private router: Router) {}
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
+
   login() {
-    //TODO
-    if (true) {
+    const validUsername = 'usuario'; // Usuario esperado
+    const validPassword = 'admin123'; // Contraseña esperada
+
+    if (this.username === validUsername && this.password === validPassword) {
       this.router.navigate(['/home']);
+    } else {
+      alert('Usuario o contraseña incorrectos');
     }
   }
 }

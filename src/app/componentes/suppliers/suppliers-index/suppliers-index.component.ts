@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { SuppliersService } from '../suppliers.service'; // Importa el servicio
 import { HttpClientModule } from '@angular/common/http';
+
 @Component({
   selector: 'app-index',
   standalone: true,
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterLink,
     CommonModule,
     HttpClientModule,
+
   ],
   providers: [SuppliersService], // Añade aquí la configuración de HttpClient
   templateUrl: './suppliers-index.component.html',

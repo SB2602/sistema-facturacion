@@ -1,19 +1,44 @@
 .home {
-    margin: 5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: relative; /* Necesario para que el fondo cubra el área completa */
+  margin: 0; /* Elimina el margen si quieres que la imagen cubra toda la pantalla */
+  padding: 0; /* Elimina el padding si es necesario */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw; /* Asegura que el contenedor ocupe el ancho completo de la ventana */
+  height: 100vh; /* Asegura que el contenedor ocupe la altura completa de la ventana */
   }
+
+  .background{
+    position: absolute; /* Posiciona el fondo detrás del contenido */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../public/fondo-login.jfif'); /* Ruta a la imagen de fondo */
+    background-size: cover; /* Asegura que la imagen cubra toda el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    filter: blur(10px); /* Ajusta el nivel de desenfoque */
+    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+  }
+
+
   .title {
     font-size: 3rem;
     padding: 2rem;
     font-weight: 700;
 
   }
+  .icon-home{
+    transform: scale(9);
+    margin: 8rem 5rem 8rem 5rem;
+    color:rgb(36, 36, 116);
+  }
   .options {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 3.5rem;
   }
   .options a{
@@ -21,17 +46,18 @@
       color: inherit; 
   }
   .button {
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 100px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     padding: 20px;
     cursor: pointer;
     background-color: rgb(186, 186, 240);
-
+    border: 3px solid #1d3499; /* Borde negro de 2px */
+    border-radius: 8px; /* Esquinas redondeadas */
   }
   
   .text {
@@ -47,7 +73,13 @@
     transform: scale(3);
     margin: 2rem;
     padding: 0;
-    
+  }
+  .home-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
   }
   
 

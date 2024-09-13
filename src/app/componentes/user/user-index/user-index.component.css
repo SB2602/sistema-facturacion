@@ -8,9 +8,22 @@
   .table {
     border: 1px solid black;
   }
-  
+  .background {
+    position: fixed; /* Cambiado de absolute a fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Cambiado de 100vh a 100% */
+    background-image: url('../../../../../public/wallpaperbetter.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    z-index: -1; /* Mantén el fondo detrás del contenido */
+  }
   .title {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  color: white;
+  font-weight: 800;
   }
   
   .buttons {
