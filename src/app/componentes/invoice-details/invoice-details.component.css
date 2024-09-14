@@ -1,0 +1,61 @@
+.index {
+  margin: 1rem; /* Reducido el margen para que el contenido se ajuste mejor */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.table {
+  border: 1px solid black;
+  width: 100%; /* Asegúrate de que la tabla use el 100% del ancho del contenedor */
+  max-width: 100%; /* Evita que la tabla se desborde */
+  overflow-x: auto; /* Añade scroll horizontal si el contenido es muy ancho */
+}
+
+.title {
+  font-size: 1.5rem; /* Ajusta el tamaño de la fuente para que sea más adecuado para el modal */
+  color: #000; /* Cambia el color a un tono más visible si es necesario */
+  font-weight: 800;
+  margin-bottom: 1rem; /* Añade un margen en la parte inferior del título */
+}
+
+.buttons {
+  margin: 1rem; /* Ajusta el margen */
+}
+
+.buttons > * {
+  margin: 0.5rem; /* Ajusta el margen de los botones */
+}
+
+.table th, .table td {
+  padding: 8px 12px; /* Ajusta el relleno de las celdas */
+  text-align: left;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table td {
+  border-bottom: 1px solid #ddd; /* Cambia el color del borde para mejor visibilidad */
+}
+
+.totals {
+  margin-top: 1rem; /* Añade margen superior para separar las sumas y los impuestos del resto del contenido */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem; /* Ajusta el espacio entre los botones */
+  justify-content: center; /* Centra los botones */
+}
+
+.buttonedit {
+  color: #1f516f;
+}
+
+.buttondelete {
+  color: #e15639;
+}

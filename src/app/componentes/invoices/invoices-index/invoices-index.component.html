@@ -20,22 +20,19 @@
             <!-- Mostrar contenido o acciones -->
             <ng-container *ngIf="column !== 'acciones'; else actionsTemplate">
               <ng-container *ngIf="column === 'cliente'">
-                {{element.cliente?.nombre}}  <!-- Mostrar nombre del cliente -->
+                {{ element.cliente?.nombre }}
+                <!-- Mostrar nombre del cliente -->
               </ng-container>
               <ng-container *ngIf="column !== 'cliente'">
-                {{element[column]}}  <!-- Mostrar otros datos -->
+                {{ element[column] }}
+                <!-- Mostrar otros datos -->
               </ng-container>
             </ng-container>
             <ng-template #actionsTemplate>
               <div class="action-buttons">
-                <!--
-                <button
-                  mat-icon-button
-                  (click)="openDetails(element.id)"
-                  class="buttondetails"
-                >
+                <button mat-icon-button class="buttondetails"(click)="openInvoiceDetails(element.id)">
                   <mat-icon>search</mat-icon>
-                </button>-->
+                </button>
                 <button
                   mat-icon-button
                   (click)="deleteInvoice(element.id)"
@@ -69,4 +66,3 @@
     </a>
   </div>
 </div>
-

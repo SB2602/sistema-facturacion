@@ -7,8 +7,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { InvoicesService } from '../invoices.service';
 import { invoices } from '../../../interfaces/invoices';
-import { InvoiceDetailsComponent } from '../../../invoice-details/invoice-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { InvoiceDetailsComponent } from '../../invoice-details/invoice-details.component';
 @Component({
   selector: 'app-invoices-index',
   standalone: true,
@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
     MatInputModule,
     MatTableModule,
     CommonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './invoices-index.component.html',
   styleUrls: ['./invoices-index.component.css'],
@@ -30,7 +30,7 @@ export class InvoicesIndexComponent implements OnInit {
     'fecha',
     'cliente',
     'total',
-    'acciones'
+    'acciones',
   ];
 
   dataSource: invoices[] = [];
@@ -43,7 +43,7 @@ export class InvoicesIndexComponent implements OnInit {
   ngOnInit(): void {
     this.invoicesService.getInvoices().subscribe((invoices) => {
       this.dataSource = invoices;
-      console.log('Invoices:', this.dataSource);  // Mensaje en consola para verificar datos
+      console.log('Invoices:', this.dataSource); // Mensaje en consola para verificar datos
     });
   }
 
@@ -55,17 +55,17 @@ export class InvoicesIndexComponent implements OnInit {
   deleteInvoice(id: number): void {
     this.invoicesService.deleteInvoice(id).subscribe(() => {
       // Actualizar la tabla después de eliminar
-      this.dataSource = this.dataSource.filter(invoice => invoice.id !== id);
+      this.dataSource = this.dataSource.filter((invoice) => invoice.id !== id);
     });
   }
-  openDetails(invoiceId: number): void {
-    const dialogRef = this.dialog.open(InvoiceDetailsComponent, {
-      width: '600px',
-      data: { invoiceId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+  openInvoiceDetails(invoiceId: number) {
+    // Abrir el modal con los detalles de la factura
+    this.dialog.open(InvoiceDetailsComponent, {
+      data: { invoiceId: invoiceId }, // Pasar el ID de la factura al modal
+      width: '40vw',  // Ajusta el ancho del modal
+    height: '50vh', // Ajusta la altura del modal
+    maxWidth: '90vw', // Establece un ancho máximo para el modal
+    maxHeight: '90vh', // Establece una altura máxima para el modal
     });
   }
 }

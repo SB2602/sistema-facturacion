@@ -25,6 +25,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { InvoicesService } from '../invoices.service';
 import { invoices } from '../../../interfaces/invoices';
 import { Router } from '@angular/router';
+import { InvoiceDetailsService } from '../invoice-details.service';
+import { InvoiceDetail } from '../../../interfaces/invoice-details';
 @Component({
   selector: 'app-invoices-add',
   standalone: true,
@@ -49,7 +51,7 @@ import { Router } from '@angular/router';
 export class InvoicesAddComponent {
   nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern('^[a-zA-Z0-9 ]+$'),
   ]);
   numberFormControl = new FormControl('', { nonNullable: true });
   dateFormControl = new FormControl('', { nonNullable: true });
@@ -74,6 +76,7 @@ export class InvoicesAddComponent {
     private dialog: MatDialog,
     private invoicesService: InvoicesService,
     private router: Router,
+    private invoiceDetailsService: InvoiceDetailsService
   ) {}
 
   ngOnInit() {
@@ -137,16 +140,12 @@ export class InvoicesAddComponent {
   }
   registerInvoice() {
     if (this.nameFormControl.invalid || this.dateFormControl.invalid || this.selectedClientId === null) {
-      return; // Validaciones simples, puedes mejorar esto con mensajes de error
+      return; // Validaciones simples
     }
   
-    // Asegúrate de que el valor no sea null y conviértelo a string
-    const numeroFactura = this.nameFormControl.value ?? ''; // Si es null, usa una cadena vacía
-  
-    // Convierte el valor de fecha a Date
+    const numeroFactura = this.nameFormControl.value ?? '';
     const fecha = new Date(this.dateFormControl.value);
   
-    // Asegúrate de que la conversión sea válida
     if (isNaN(fecha.getTime())) {
       console.error('Fecha inválida');
       return;
@@ -154,23 +153,53 @@ export class InvoicesAddComponent {
   
     const invoice: invoices = {
       numero_factura: numeroFactura,
-      fecha: fecha, // Asigna la fecha convertida
-      cliente: { id: this.selectedClientId } as Clients, // Solo enviamos el id del cliente
+      fecha: fecha,
+      cliente: { id: this.selectedClientId } as Clients,
       total: this.getTotal()
     };
   
-    // Imprime el objeto invoice en la consola para verificar
     console.log('Enviando al backend:', invoice);
   
     this.invoicesService.addInvoice(invoice).subscribe(
-      () => {
-        console.log('Factura registrada con éxito');
-        this.invoicesService.refreshInvoice();
-        this.router.navigate(['/invoices/index']);
+      (response: invoices) => { // La respuesta debería ser de tipo `invoices`
+        console.log('Factura registrada con éxito', response);
+  
+        // Verificar si la respuesta contiene un ID
+        const invoiceId = response?.id;
+        if (invoiceId) {
+          this.saveInvoiceDetails(invoiceId);
+        } else {
+          console.error('ID de factura no encontrado en la respuesta');
+        }
       },
       (error) => {
         console.error('Error al registrar la factura', error);
       }
     );
   }
+  
+  saveInvoiceDetails(invoiceId: number) {
+    this.invoiceDetails.forEach(detail => {
+      const invoiceDetail = {
+        invoice: { id: invoiceId } as any, // Enviar solo el ID para la relación con la factura
+        product: { id: detail.productId } as any, // Enviar solo el ID para la relación con el producto
+        cantidad: detail.quantity,
+        precio_unitario: detail.price,
+        subtotal: detail.total
+      };
+  
+      this.invoiceDetailsService.saveInvoiceDetails(invoiceDetail).subscribe(
+        () => {
+          console.log('Detalle de factura guardado con éxito');
+          this.invoicesService.refreshInvoice();
+          this.router.navigate(['/invoices/index']);
+        },
+        (error) => {
+          console.error('Error al guardar el detalle de la factura', error);
+        }
+      );
+    });
+  }
+  
+  
 }

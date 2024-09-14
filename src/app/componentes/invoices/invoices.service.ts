@@ -22,9 +22,8 @@ export class InvoicesService {
     return this.http.get<invoices>(`${this.apiUrl}/${id}`);
   }
 
-  // Crear una nueva factura
-  addInvoice(invoice: invoices): Observable<void> {
-    return this.http.post<void>(this.apiUrl, invoice);
+  addInvoice(invoice: invoices): Observable<invoices> {
+    return this.http.post<invoices>(`${this.apiUrl}`, invoice);
   }
 
   // Actualizar una factura existente
