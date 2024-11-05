@@ -15,18 +15,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { CommonModule } from '@angular/common'; 
 import { Router } from '@angular/router';
 import { ProductsService } from '../products.service';
 
-import { CategoriesService } from '../../categories/categories.service'; // Asegúrate de tener este servicio
+import { CategoriesService } from '../../categories/categories.service'; 
 import { Categories } from '../../../interfaces/categories';
 
 import { Suppliers } from '../../../interfaces/suppliers';
 import { SuppliersService } from '../../suppliers/suppliers.service';
 
 @Component({
-  selector: 'app-products-add', // Cambiado a 'products-add'
+  selector: 'app-products-add', 
   standalone: true,
   imports: [
     FormsModule,
@@ -38,8 +38,8 @@ import { SuppliersService } from '../../suppliers/suppliers.service';
     RouterLink,
     CommonModule,
   ],
-  templateUrl: './products-add.component.html', // Cambiado a 'products-add.component.html'
-  styleUrl: './products-add.component.css', // Cambiado a 'products-add.component.css'
+  templateUrl: './products-add.component.html', 
+  styleUrl: './products-add.component.css', 
 })
 export class ProductsAddComponent implements OnInit {
   nombreProductoFormControl = new FormControl<string | null>(null, [
@@ -49,7 +49,7 @@ export class ProductsAddComponent implements OnInit {
 
   descripcionFormControl = new FormControl<string | null>(null, [
     Validators.required,
-    Validators.pattern('^[a-zA-Z0-9., ]+$'),
+    Validators.pattern('^[a-zA-Z0-9 ]+$'),
   ]);
 
   precioFormControl = new FormControl<number | null>(null, [

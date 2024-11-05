@@ -8,28 +8,28 @@
 
 .table {
   border: 1px solid black;
-  width: 100%; /* Asegúrate de que la tabla use el 100% del ancho del contenedor */
-  max-width: 100%; /* Evita que la tabla se desborde */
-  overflow-x: auto; /* Añade scroll horizontal si el contenido es muy ancho */
+  width: 100%; 
+  max-width: 100%; 
+  overflow-x: auto; 
 }
 
 .title {
-  font-size: 1.5rem; /* Ajusta el tamaño de la fuente para que sea más adecuado para el modal */
-  color: #000; /* Cambia el color a un tono más visible si es necesario */
+  font-size: 1.5rem; 
+  color: #000; 
   font-weight: 800;
-  margin-bottom: 1rem; /* Añade un margen en la parte inferior del título */
+  margin-bottom: 1rem; 
 }
 
 .buttons {
-  margin: 1rem; /* Ajusta el margen */
+  margin: 1rem; 
 }
 
 .buttons > * {
-  margin: 0.5rem; /* Ajusta el margen de los botones */
+  margin: 0.5rem; 
 }
 
 .table th, .table td {
-  padding: 8px 12px; /* Ajusta el relleno de las celdas */
+  padding: 8px 12px; 
   text-align: left;
 }
 
@@ -39,17 +39,17 @@
 }
 
 .table td {
-  border-bottom: 1px solid #ddd; /* Cambia el color del borde para mejor visibilidad */
+  border-bottom: 1px solid #ddd;
 }
 
 .totals {
-  margin-top: 1rem; /* Añade margen superior para separar las sumas y los impuestos del resto del contenido */
+  margin-top: 1rem; 
 }
 
 .action-buttons {
   display: flex;
-  gap: 1rem; /* Ajusta el espacio entre los botones */
-  justify-content: center; /* Centra los botones */
+  gap: 1rem;
+  justify-content: center; 
 }
 
 .buttonedit {

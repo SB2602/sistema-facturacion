@@ -43,7 +43,7 @@ import { InvoiceDetail } from '../../../interfaces/invoice-details';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    MatDialogModule // Aseguramos que MatTableModule esté importado
+    MatDialogModule 
   ],
   templateUrl: './invoices-add.component.html',
   styleUrls: ['./invoices-add.component.css'],
